@@ -13,15 +13,50 @@ void toLowerCase(string &name)
     }
 }
 
+void toUpperCase(string &name)
+{
+    for (int i = 0; i < name.size(); i++)
+    {
+        if (name[i] >= 'a' && name[i] <= 'z')
+        {
+            int temp = name[i] - 'a' + 'A';
+            name[i] = temp;
+        }
+    }
+}
+
+int charToNum(char ch)
+{
+    if (ch >= 'a' && ch <= 'z')
+    {
+        return ch - 'a';
+    }
+    else
+    {
+        return ch - 'A';
+    }
+}
+
+char numToChar(int n)
+{
+    return 'a' + n - 1;
+}
+
 int main()
 {
-    string name;
+    // string name = "Yasir";
 
-    cin >> name;
+    // toLowerCase(name);
 
-    toLowerCase(name);
+    // cout << "Lowercase name: " << name << endl;
 
-    cout << isalnum(name[0]);
+    // toUpperCase(name);
 
-    cout << "Lowercase name: " << name;
+    // cout << "Uppercase name: " << name;
+
+    char c = 'z';
+
+    // cout << charToNum(c);
+
+    cout << numToChar(26);
 }

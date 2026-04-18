@@ -1,0 +1,5 @@
+To convert into lower case: ch - 'A' + 'a';
+To convert into upper case: ch - 'a' + 'A';
+
+to convert char into its index in aplhabet order: ch - 'a';
+to convert a number into its corresponding char in aplhabet order: 'a' + num - 1;whats 
