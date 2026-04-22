@@ -1,33 +1,90 @@
 #include <iostream>
 #include <map>
+#include <set>
 #include <vector>
 using namespace std;
 
 int main()
 {
-    int arr1[] = {1, 2, 3};
-    int arr2[] = {2, 3, 4};
+    vector<int> arr1 = {1, 2, 3};
+    vector<int> arr2 = {2, 3, 4};
     // Approach using ordered map
-    vector<int> res;
-    map<int, int> m;
+    // vector<int> res;
+    // map<int, int> m;
 
-    for (int i = 0; i < 3; i++)
+    // Approach using set
+    // set<int> s;
+    // for (int i = 0; i < 3; i++)
+    // {
+    //     s.insert(arr1[i]);
+    // }
+
+    // for (int i = 0; i < 3; i++)
+    // {
+    //     s.insert(arr2[i]);
+    // }
+
+    // vector<int> res(s.begin(), s.end());
+
+    // for (int i = 0; i < res.size(); i++)
+    // {
+    //     cout << res[i] << " ";
+    // }
+
+    // Appraoch using 2 pointers;
+
+    int i = 0, j = 0;
+    vector<int> Union;
+
+    while (i < arr1.size() && j < arr2.size())
     {
-        m[arr1[i]]++;
+        if (arr1[i] < arr2[j])
+        {
+            if (Union.empty() || Union.back() != arr1[i])
+            {
+                Union.push_back(arr1[i]);
+            }
+            i++;
+        }
+        else if (arr1[i] > arr2[j])
+        {
+            if (Union.empty() || Union.back() != arr2[j])
+            {
+                Union.push_back(arr2[j]);
+            }
+            j++;
+        }
+        else
+        {
+            if (Union.empty() || Union.back() != arr1[i])
+            {
+                Union.push_back(arr1[i]);
+            }
+            i++;
+            j++;
+        }
     }
 
-    for (int i = 0; i < 3; i++)
+    while (i < arr1.size())
     {
-        m[arr2[i]]++;
+        if (Union.empty() || Union.back() != arr2[i])
+        {
+            Union.push_back(arr2[i]);
+        }
+        i++;
     }
 
-    for (auto it : m)
+    while (j < arr1.size())
     {
-        res.push_back(it.first);
+        if (Union.empty() || Union.back() != arr2[j])
+        {
+            Union.push_back(arr2[j]);
+        }
+        j++;
     }
 
-    for (int i = 0; i < res.size(); i++)
+    for (int i : Union)
     {
-        cout << res[i] << " ";
+        cout << i << " ";
     }
 }
