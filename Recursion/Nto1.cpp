@@ -1,17 +1,20 @@
 #include <iostream>
 using namespace std;
 
-void print1toN(int n)
+void printNto1(int n)
 {
     if (n == 0)
         return;
 
-    print1toN(n - 1);
     cout << n << endl;
+
+    n--;
+
+    printNto1(n);
 }
 
 int main()
 {
     int n = 5;
-    print1toN(n);
+    printNto1(n);
 }
