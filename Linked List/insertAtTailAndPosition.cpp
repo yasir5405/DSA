@@ -73,6 +73,38 @@ void insertAtPosition(Node *&tail, Node *&head, int pos, int data)
     temp->next = nodeToInsert;
 }
 
+void deleteNode(int pos, Node *&head)
+{
+    if (pos == 1)
+    {
+        Node *temp = head;
+        head = head->next;
+        delete temp;
+        return;
+    }
+
+    Node *curr = head;
+    Node *prev = NULL;
+
+    int count = 1;
+
+    while (count < pos && curr != NULL)
+    {
+        prev = curr;
+        curr = curr->next;
+        count++;
+    }
+
+    if (curr == NULL)
+    {
+        cout << "Position out of bounds. " << endl;
+        return;
+    }
+
+    prev->next = curr->next;
+    delete curr;
+}
+
 int main()
 {
     Node *head = new Node(12);
@@ -80,6 +112,8 @@ int main()
 
     head->next = n1;
 
-    insertAtPosition(n1, head, 2, 123);
+    insertAtPosition(n1, head, 3, 123);
+
+    deleteNode(3, head);
     print(head);
 }
