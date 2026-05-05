@@ -40,29 +40,46 @@ int getLength(Node *head)
     return len;
 }
 
-void insertAtHead(Node *&head, int data)
+void insertAtHead(Node *&head, Node *&tail, int data)
 {
     Node *temp = new Node(data);
 
-    temp->next = head;
-    head->prev = temp;
-    head = temp;
+    if (head != NULL)
+    {
+        temp->next = head;
+        head->prev = temp;
+        head = temp;
+    }
+    else
+    {
+        head = temp;
+        tail = temp;
+    }
 }
 
-void insertAtTail(Node *&tail, int data)
+void insertAtTail(Node *&head, Node *&tail, int data)
 {
     Node *temp = new Node(data);
 
-    tail->next = temp;
-    temp->prev = tail;
-    tail = temp;
+    if (tail != NULL)
+    {
+
+        tail->next = temp;
+        temp->prev = tail;
+        tail = temp;
+    }
+    else
+    {
+        head = temp;
+        tail = temp;
+    }
 }
 
 void insertAtPos(Node *&head, Node *&tail, int pos, int data)
 {
     if (pos == 1)
     {
-        insertAtHead(head, data);
+        insertAtHead(head, tail, data);
         return;
     }
 
@@ -77,7 +94,7 @@ void insertAtPos(Node *&head, Node *&tail, int pos, int data)
 
     if (temp->next == NULL)
     {
-        insertAtTail(tail, data);
+        insertAtTail(head, tail, data);
         return;
     }
 
@@ -91,19 +108,13 @@ void insertAtPos(Node *&head, Node *&tail, int pos, int data)
 
 int main()
 {
-    Node *head = new Node(1);
-    Node *n = new Node(2);
-    Node *n2 = new Node(3);
+    Node *head = NULL;
+    Node *tail = NULL;
 
-    head->next = n;
-    n->prev = head;
-    n->next = n2;
-    n2->prev = n;
+    insertAtHead(head, tail, 1);
 
-    insertAtHead(head, 0);
+    insertAtTail(head, tail, 2);
 
-    insertAtTail(n2, 4);
-
-    insertAtPos(head, n2, 2, 1234);
+    insertAtPos(head, tail, 3, 3);
     print(head);
 }
