@@ -106,6 +106,34 @@ void insertAtPos(Node *&head, Node *&tail, int pos, int data)
     newNode->prev = temp;
 }
 
+void deleteNode(Node *&head, Node *&tail, int pos)
+{
+    // This deletes the first node(head node)
+    if (pos == 1)
+    {
+        if (head == NULL)
+        {
+            return;
+        }
+
+        Node *temp = head;
+
+        if (head->next == NULL)
+        {
+            head = NULL;
+            tail = NULL;
+            delete temp;
+            return;
+        }
+
+        head = head->next;
+        head->prev = NULL;
+        temp->next = NULL;
+        delete temp;
+        return;
+    }
+}
+
 int main()
 {
     Node *head = NULL;
