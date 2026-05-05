@@ -108,6 +108,10 @@ void insertAtPos(Node *&head, Node *&tail, int pos, int data)
 
 void deleteNode(Node *&head, Node *&tail, int pos)
 {
+    int len = getLength(head);
+    if (pos < 1 || pos > len)
+        return;
+
     // This deletes the first node(head node)
     if (pos == 1)
     {
@@ -132,6 +136,29 @@ void deleteNode(Node *&head, Node *&tail, int pos)
         delete temp;
         return;
     }
+
+    if (pos == len)
+    {
+        Node *temp = tail;
+        tail = tail->prev;
+        tail->next = NULL;
+        delete temp;
+        return;
+    }
+
+    Node *curr = head;
+
+    int cnt = 1;
+
+    while (cnt < pos)
+    {
+        curr = curr->next;
+        cnt++;
+    }
+
+    curr->prev->next = curr->next;
+    curr->next->prev = curr->prev;
+    delete curr;
 }
 
 int main()
@@ -144,5 +171,7 @@ int main()
     insertAtTail(head, tail, 2);
 
     insertAtPos(head, tail, 3, 3);
+
+    deleteNode(head, tail, 2);
     print(head);
 }
