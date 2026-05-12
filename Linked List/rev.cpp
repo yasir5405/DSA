@@ -1,4 +1,5 @@
 #include <iostream>
+#include <map>
 using namespace std;
 
 class Node
@@ -109,6 +110,30 @@ void reverse(Node *&head)
     Node *curr = head;
 
     reverseResursively(head, prev, curr);
+}
+
+bool detectLoop(Node *head)
+{
+    // If head is null
+    if (head == NULL)
+        return false;
+
+    map<Node *, bool> visited;
+
+    Node *temp = head;
+
+    while (temp != NULL)
+    {
+        if (visited[temp] == true)
+        {
+            return true;
+        }
+
+        visited[temp] = true;
+
+        temp = temp->next;
+    }
+    return false;
 }
 
 int main()
